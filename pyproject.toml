@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "expenses-tracker"
+version = "0.1.0"
+description = ""
+authors = ["silverscorpio <rajat.newtoneinstein@gmail.com>"]
+readme = "README.md"
+packages = [{include = "expenses_tracker"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "^0.21.1"
+google-api-python-client = "^2.79.0"
+google-auth-httplib2 = "^0.1.0"
+google-auth-oauthlib = "^1.0.0"
+requests-oauthlib = "^1.3.1"
+beautifulsoup4 = "^4.11.2"
+pytz = "^2022.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
