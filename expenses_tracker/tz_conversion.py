@@ -1,13 +1,21 @@
-from datetime import datetime, timedelta
+# Timezone conversion
+
+from datetime import datetime
 from pytz import timezone
 import pytz
 
-utc = pytz.utc
-given_date = "2023/02/24 08:55PM"
-# new_date = datetime.strftime(datetime.strptime(given_date, "%Y/%m/%d %I:%M%p"), "%Y/%m/%d %H:%M")
-new_date1 = datetime.strptime(given_date, "%Y/%m/%d %I:%M%p")
-india_tz = timezone("Asia/Kolkata")
-germany_tz = timezone("Europe/Berlin")
-local = india_tz.localize(new_date1)
-germany_time = local.astimezone(germany_tz)
-print(germany_time)
+
+# (default: from India to Germany)
+def convert_tz(given_datetime_12: str, given_tz: str = "Asia/Kolkata", new_tz: str = "Europe/Berlin") -> str:
+    if all([tz in pytz.all_timezones for tz in (given_tz, new_tz)]):
+        # input datetime format "2023/02/24 08:55 PM"
+        # example - convert_tz(given_datetime_12="2023/02/24 08:55 PM")
+        formatted_datetime_24 = datetime.strptime(given_datetime_12, "%Y/%m/%d %I:%M %p")
+        given_tz = timezone(given_tz)
+        new_tz = timezone(new_tz)
+        local_given_tz_time = given_tz.localize(formatted_datetime_24)
+        return datetime.strftime(local_given_tz_time.astimezone(new_tz), "%Y/%m/%d %I:%M %p")
+
+
+if __name__ == '__main__':
+    pass

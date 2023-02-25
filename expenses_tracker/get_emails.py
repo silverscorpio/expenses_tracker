@@ -23,7 +23,6 @@ from environs import Env
 
 
 # TODO OOP based (scalable and loosely coupled for further use)
-# TODO include time zone conversion
 # TODO time based filtering (epoch ms) - on hold (maybe - too specific)
 # TODO saving to database (sqlite3 (KISS), api - sqlalchemy) and further usage (visualisation - plotly)
 # TODO create category for each transaction to track the type of spending (hint -spendee)
