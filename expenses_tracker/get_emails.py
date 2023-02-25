@@ -1,14 +1,13 @@
 from datetime import datetime, timedelta
 import json
-from parse_msg import msg_parse
-from dotenv import load_dotenv
 from parse_msg import regex_parse
-import os.path
 from parse_msg import parse_all
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
+
+from environs import Env
 
 # load_dotenv()
 #
@@ -25,16 +24,17 @@ from google.oauth2.credentials import Credentials
 
 # TODO OOP based (scalable and loosely coupled for further use)
 # TODO include time zone conversion
-# TODO time based filtering (epoch ms)
-# TODO saving to database and further usage
+# TODO time based filtering (epoch ms) - on hold (maybe - too specific)
+# TODO saving to database (sqlite3 (KISS), api - sqlalchemy) and further usage (visualisation - plotly)
 # TODO env variables handling
+# TODO create category for each transaction to track the type of spending (hint -spendee)
 
-from dotenv import load_dotenv
 
-load_dotenv()
+env = Env()
+env.read_env()
 
-USER_ID = os.getenv("USER_ID")
-FROM_EMAIL = os.getenv("FROM_EMAIL")
+USER_ID = env.str("USER_ID")
+FROM_EMAIL = env.str("FROM_EMAIL")
 
 
 def fetch_data(given_date: str = ""):
