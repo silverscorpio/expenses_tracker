@@ -26,7 +26,6 @@ from environs import Env
 # TODO include time zone conversion
 # TODO time based filtering (epoch ms) - on hold (maybe - too specific)
 # TODO saving to database (sqlite3 (KISS), api - sqlalchemy) and further usage (visualisation - plotly)
-# TODO env variables handling
 # TODO create category for each transaction to track the type of spending (hint -spendee)
 
 
@@ -81,7 +80,7 @@ if __name__ == '__main__':
     # base_url = "https://gmail.googleapis.com/gmail/v1/users/"
     # mail_url = os.path.join(base_url, USER_ID, "messages")
     SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
-    email_contents = fetch_data(given_date="2023/2/20")
+    email_contents = fetch_data(given_date="2023/2/23")
 
     # regex
     amt_regex = r"[A-Z]{3}\s\d+\.?\d+[\.?|\s]"
