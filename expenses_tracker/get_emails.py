@@ -22,8 +22,7 @@ from environs import Env
 # AUTH_TOKEN = json.loads(os.getenv("AUTH_TOKEN"))
 
 
-# TODO OOP based (scalable and loosely coupled for further use)
-# TODO time based filtering (epoch ms) - on hold (maybe - too specific)
+# TODO OOP based
 # TODO saving to database (sqlite3 (KISS), api - sqlalchemy) and further usage (visualisation - plotly)
 # TODO create category for each transaction to track the type of spending (hint -spendee)
 
