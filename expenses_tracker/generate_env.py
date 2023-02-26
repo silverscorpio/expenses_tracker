@@ -1,4 +1,4 @@
-# Generate the .env file from Google credentials
+# Generate the .env file from Google credentials (json)
 
 import json
 
@@ -10,7 +10,7 @@ def get_creds(filename: str) -> dict:
     return v
 
 
-def get_env(creds_filename: str = "../credentials.json", env_filename: str = ".env") -> None:
+def get_env(creds_filename: str = "../credentials.json", env_filename: str = "../.env") -> None:
     with open(env_filename, "w") as f:
         for k, v in get_creds(filename=creds_filename).items():
             if isinstance(v, list):
