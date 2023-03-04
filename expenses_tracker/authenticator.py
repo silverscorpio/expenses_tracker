@@ -30,32 +30,20 @@ class Authenticator:
                 self._creds = flow.run_local_server()
             with open('../token.json', 'w') as token:
                 token.write(self._creds.to_json())
-                self.token_generated = True
+                self._token_generated = True
 
     @property
     def token_generated(self) -> bool:
         return self._token_generated
 
-    @token_generated.setter
-    def token_generated(self, value) -> None:
-        if not isinstance(value, bool):
-            raise ValueError("Invalid Type")
-        self.token_generated = value
-
     @property
     def env_generated(self) -> bool:
         return self._env_generated
 
-    @env_generated.setter
-    def env_generated(self, value) -> None:
-        if not isinstance(value, bool):
-            raise ValueError("Invalid Type")
-        self.env_generated = value
-
     def generate_env(self) -> None:
         if not self.env_generated:
             get_env(creds_filename=self.creds_file)
-            self.env_generated = True
+            self._env_generated = True
 
     def get_service(self):
         if self._creds is not None:

@@ -49,6 +49,10 @@ def fetch_data(given_date: str = ""):
         service = build('gmail', 'v1', credentials=creds)
         results = service.users().messages().list(userId=USER_ID, q=q_params["q"]).execute()
         msgs = results["messages"]
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+
+        # parser part
         msg_ids = [i["id"] for i in msgs]
         msg_data = []
         for m in msg_ids:
@@ -59,8 +63,7 @@ def fetch_data(given_date: str = ""):
         # for i in msg_data:
         #     print(i)
         #     print("-------------")
-    except HttpError as error:
-        print(f"An error occurred: {error}")
+
     # r = auth_client.get(mail_url, params=q_params)
     # if r.status_code == 200:
     #     content = r.content.decode("utf-8")
