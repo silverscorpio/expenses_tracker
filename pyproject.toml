@@ -15,6 +15,7 @@ beautifulsoup4 = "^4.11.2"
 pytz = "^2022.7.1"
 environs = "^9.5.0"
 pre-commit = "^3.2.0"
+peewee = "^3.16.0"
 
 
 [build-system]

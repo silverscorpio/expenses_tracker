@@ -432,6 +432,17 @@ files = [
 ]
 
 [[package]]
+name = "peewee"
+version = "3.16.0"
+description = "a little orm"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "peewee-3.16.0.tar.gz", hash = "sha256:1800c0a04962ee99d161c07f5a12fc49549caf5cfcda426a9103e34e37f854ba"},
+]
+
+[[package]]
 name = "platformdirs"
 version = "3.1.1"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -758,4 +769,4 @@ test = ["covdefaults (>=2.2.2)", "coverage (>=7.1)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "72051f6e8fa536511fde8d36b1e27866743b9c6e41f7e60bf56922059308d5aa"
+content-hash = "d520dce8a93de4084a41e9d1adf98a41b44a136ef20a4e7504207c8b7119eb84"
