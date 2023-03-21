@@ -16,11 +16,11 @@ class Authenticator:
             self.scopes: list[str] = SCOPES
         self.creds_file = creds_path
         self._creds = None
-        self._token_generated = True if os.path.exists('../token.json') else False
-        self._env_generated = True if os.path.exists('../.env') else False
+        self._is_token_generated = True if os.path.exists('../token.json') else False
+        self._is_env_generated = True if os.path.exists('../.env') else False
 
-    def generate_token(self):
-        if self.token_generated:
+    def generate_creds(self):
+        if self._is_token_generated:
             self._creds = Credentials.from_authorized_user_file('../token.json', self.scopes)
         if not self._creds or not self._creds.valid:
             if self._creds and self._creds.expired and self._creds.refresh_token:
@@ -30,26 +30,23 @@ class Authenticator:
                 self._creds = flow.run_local_server()
             with open('../token.json', 'w') as token:
                 token.write(self._creds.to_json())
-                self._token_generated = True
-
-    @property
-    def token_generated(self) -> bool:
-        return self._token_generated
-
-    @property
-    def env_generated(self) -> bool:
-        return self._env_generated
+                self._is_token_generated = True
 
     def generate_env(self) -> None:
-        if not self.env_generated:
+        if not self.is_env_generated:
             get_env(creds_filename=self.creds_file)
-            self._env_generated = True
+            self._is_env_generated = True
 
     def get_service(self):
         if self._creds is not None:
             return build('gmail', 'v1', credentials=self._creds)
-        self._get_creds()
+        self.generate_creds()
         return build('gmail', 'v1', credentials=self._creds)
 
-    def _get_creds(self):
-        self.generate_token()
+    @property
+    def is_token_generated(self) -> bool:
+        return self._is_token_generated
+
+    @property
+    def is_env_generated(self) -> bool:
+        return self._is_env_generated

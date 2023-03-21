@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
-import json
-from parse_msg import regex_parse
-from parse_msg import parse_all
+from expenses_tracker.scripts.parse_msg import regex_parse
+from expenses_tracker.scripts.parse_msg import parse_all
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError

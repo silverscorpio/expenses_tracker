@@ -16,9 +16,8 @@ class Inbox:
         self.duration = time_duration
         self.from_date = None
         self.till_date = None
-        self.messages = None
 
-    def get_inbox_msgs_data(self):
+    def get_inbox_msgs_data(self) -> list[str]:
         if self.from_date is None or self.till_date is None:
             self._set_from_till_dates()
         try:
@@ -26,12 +25,12 @@ class Inbox:
                                                                             q=self._get_query_params()["q"]).execute()
             msgs = results["messages"]
             msg_ids = [i["id"] for i in msgs]
-            msgs_data = []
+            raw_msgs_data = []
             for msg in msg_ids:
                 msg_result = self.authorizer.get_service().users().messages().get(userId=USER_ID, id=msg).execute()
                 data = msg_result.get("payload").get("body").get("data")
-                msgs_data.append(data)
-            return msgs_data
+                raw_msgs_data.append(data)
+            return raw_msgs_data
         except HttpError as error:
             # TODO logging
             print(f"An error occurred: {error}")
