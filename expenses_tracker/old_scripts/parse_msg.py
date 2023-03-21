@@ -57,7 +57,7 @@ time_regex = r"\s\d{2}:\d{2}\s[AP][M]"
 location_regex = r"[AP][M]\s[a][t][\w\s]{1,150}\s*\.{1}"
 
 
-#### multiple parsing
+# multiple parsing
 def msg_parse(fetched_data: list[bytes]) -> list:
     emails = []
     for ind, val in enumerate(fetched_data):
@@ -73,4 +73,4 @@ def regex_parse(regex: str, search_exp: str) -> list:
 
 
 if __name__ == "__main__":
-    msg_parse(fetched_data=data)
+    pass

@@ -8,9 +8,9 @@ from pytz import timezone
 
 # (default: from India to Germany)
 def convert_tz(
-    given_datetime_12: str,
-    given_tz: str = "Asia/Kolkata",
-    new_tz: str = "Europe/Berlin",
+        given_datetime_12: str,
+        given_tz: str = "Asia/Kolkata",
+        new_tz: str = "Europe/Berlin",
 ) -> str:
     if all([tz in pytz.all_timezones for tz in (given_tz, new_tz)]):
         # input datetime format "2023/02/24 08:55 PM"
@@ -27,4 +27,4 @@ def convert_tz(
 
 
 if __name__ == "__main__":
-    pass
+    print(convert_tz(given_datetime_12="2023/03/21 01:36 AM"))
