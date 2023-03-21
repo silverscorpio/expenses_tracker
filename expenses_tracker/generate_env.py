@@ -10,7 +10,9 @@ def get_creds(filename: str) -> dict:
     return v
 
 
-def get_env(creds_filename: str = "../credentials.json", env_filename: str = "../.env") -> None:
+def get_env(
+    creds_filename: str = "../credentials.json", env_filename: str = "../.env"
+) -> None:
     with open(env_filename, "w") as f:
         for k, v in get_creds(filename=creds_filename).items():
             if isinstance(v, list):
@@ -19,5 +21,5 @@ def get_env(creds_filename: str = "../credentials.json", env_filename: str = "..
                 f.write(f"{k.upper()}={v}\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     get_env()

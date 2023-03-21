@@ -16,9 +16,9 @@ def save_json(name: str, data_val):
 
 
 # step 1
-def parse_data(mail: bytes):
+def parse_data(mail: bytes, file):
     data_json = json.loads(mail.decode("utf-8"))
-    # save_json(file, data_json)
+    save_json(file, data_json)
     return data_json
 
 
@@ -26,7 +26,7 @@ def parse_data(mail: bytes):
 def bs_data(req_data):
     # TODO add check on size and body data
     conv_data = decode_content(req_data.get("payload").get("body").get("data"))
-    conv_bs_data = BeautifulSoup(conv_data, 'html.parser')
+    conv_bs_data = BeautifulSoup(conv_data, "html.parser")
     value = conv_bs_data.get_text()
     return value.strip()
 
@@ -36,9 +36,10 @@ def bs_data(req_data):
 # with open("file.json", "w") as f:
 #     json.dump(ans, f)
 
+
 def parse_all(body: str) -> str:
     x = decode_content(body)
-    conv_bs_data = BeautifulSoup(x, 'html.parser')
+    conv_bs_data = BeautifulSoup(x, "html.parser")
     value = conv_bs_data.get_text()
     return value.strip()
 
@@ -71,5 +72,5 @@ def regex_parse(regex: str, search_exp: str) -> list:
         return match
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     msg_parse(fetched_data=data)

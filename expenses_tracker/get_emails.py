@@ -1,12 +1,11 @@
 from datetime import datetime, timedelta
-from expenses_tracker.scripts.parse_msg import regex_parse
-from expenses_tracker.scripts.parse_msg import parse_all
-
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-from google.oauth2.credentials import Credentials
 
 from environs import Env
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+from expenses_tracker.scripts.parse_msg import parse_all, regex_parse
 
 # load_dotenv()
 #
@@ -41,12 +40,14 @@ def fetch_data(given_date: str = ""):
         past_date = datetime.strftime(datetime.today() - timedelta(days=3), "%Y/%m/%d")
     future_date = datetime.strftime(datetime.today() + timedelta(days=1), "%Y/%m/%d")
     q_params = {"q": f"from:({FROM_EMAIL}) after:{past_date} before:{future_date}"}
-    creds = Credentials.from_authorized_user_file('../token.json', SCOPES)
+    creds = Credentials.from_authorized_user_file("../token.json", SCOPES)
     # request
     try:
         # Call the Gmail API
-        service = build('gmail', 'v1', credentials=creds)
-        results = service.users().messages().list(userId=USER_ID, q=q_params["q"]).execute()
+        service = build("gmail", "v1", credentials=creds)
+        results = (
+            service.users().messages().list(userId=USER_ID, q=q_params["q"]).execute()
+        )
         msgs = results["messages"]
     except HttpError as error:
         print(f"An error occurred: {error}")
@@ -76,10 +77,10 @@ def fetch_data(given_date: str = ""):
     #     return msg_data
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # base_url = "https://gmail.googleapis.com/gmail/v1/users/"
     # mail_url = os.path.join(base_url, USER_ID, "messages")
-    SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
+    SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
     email_contents = fetch_data(given_date="2023/2/23")
 
     # regex

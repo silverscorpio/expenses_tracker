@@ -1,12 +1,13 @@
-from settings import USER_ID, FROM_EMAIL
 from datetime import datetime, timedelta
+
 from authenticator import Authenticator
 from googleapiclient.errors import HttpError
 from message_parser import MessageParser
-
+from settings import FROM_EMAIL, USER_ID
 
 # TODO add the possibility of giving months or years
 # TODO implement logger - a basic template (reusable) - log database
+
 
 class Inbox:
     DATE_FORMAT: str = "%Y/%m/%d"  # 2023/3/4 gmail format (year/month/day)
@@ -21,13 +22,24 @@ class Inbox:
         if self.from_date is None or self.till_date is None:
             self._set_from_till_dates()
         try:
-            results = self.authorizer.get_service().users().messages().list(userId=USER_ID,
-                                                                            q=self._get_query_params()["q"]).execute()
+            results = (
+                self.authorizer.get_service()
+                .users()
+                .messages()
+                .list(userId=USER_ID, q=self._get_query_params()["q"])
+                .execute()
+            )
             msgs = results["messages"]
             msg_ids = [i["id"] for i in msgs]
             raw_msgs_data = []
             for msg in msg_ids:
-                msg_result = self.authorizer.get_service().users().messages().get(userId=USER_ID, id=msg).execute()
+                msg_result = (
+                    self.authorizer.get_service()
+                    .users()
+                    .messages()
+                    .get(userId=USER_ID, id=msg)
+                    .execute()
+                )
                 data = msg_result.get("payload").get("body").get("data")
                 raw_msgs_data.append(data)
             return raw_msgs_data
@@ -37,13 +49,20 @@ class Inbox:
 
     def _get_query_params(self):
         # TODO currently implemented for searching using from a sender and between two specific dates
-        filter_string = f"from:({FROM_EMAIL}) after:{self.from_date} before:{self.till_date}"
+        filter_string = (
+            f"from:({FROM_EMAIL}) after:{self.from_date} before:{self.till_date}"
+        )
         return {"q": filter_string}
 
     def _set_from_till_dates(self):
         if isinstance(self.duration, int):
-            self.from_date = datetime.strftime(datetime.today() - timedelta(days=self.duration), Inbox.DATE_FORMAT)
+            self.from_date = datetime.strftime(
+                datetime.today() - timedelta(days=self.duration), Inbox.DATE_FORMAT
+            )
         elif isinstance(self.duration, str):
-            self.from_date = datetime.strftime(datetime.strptime(self.duration, Inbox.DATE_FORMAT),
-                                               Inbox.DATE_FORMAT)
-        self.till_date = datetime.strftime(datetime.today() + timedelta(days=1), Inbox.DATE_FORMAT)
+            self.from_date = datetime.strftime(
+                datetime.strptime(self.duration, Inbox.DATE_FORMAT), Inbox.DATE_FORMAT
+            )
+        self.till_date = datetime.strftime(
+            datetime.today() + timedelta(days=1), Inbox.DATE_FORMAT
+        )

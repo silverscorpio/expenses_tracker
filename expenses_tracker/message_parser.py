@@ -1,13 +1,12 @@
 import base64
-from typing import List, Any
+import re
+from typing import Any, List
 
 from bs4 import BeautifulSoup
-import re
 
 
 # TODO variable declaration inside classes
 class MessageParser:
-
     def __init__(self, messages: list[str]):
         self.msgs = messages
 
@@ -19,14 +18,19 @@ class MessageParser:
         for msg in self.msgs:
             msg_info = []
             for r in regex_list:
-                msg_info.append([i.strip() for i in MessageParser._regex_parse(regex=r, search_exp=msg)])
+                msg_info.append(
+                    [
+                        i.strip()
+                        for i in MessageParser._regex_parse(regex=r, search_exp=msg)
+                    ]
+                )
             extracted_data.append(msg_info)
         return extracted_data
 
     @staticmethod
     def get_processed_msg(body: str) -> str:
         decoded_body = MessageParser._decode_content(body)
-        extracted_soup = BeautifulSoup(decoded_body, 'html.parser')
+        extracted_soup = BeautifulSoup(decoded_body, "html.parser")
         return extracted_soup.get_text().strip()
 
     # helper functions
