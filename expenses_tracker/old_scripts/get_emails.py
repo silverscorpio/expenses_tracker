@@ -5,7 +5,7 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from expenses_tracker.scripts.parse_msg import parse_all, regex_parse
+from expenses_tracker.old_scripts.parse_msg import parse_all, regex_parse
 
 # load_dotenv()
 #
@@ -40,7 +40,7 @@ def fetch_data(given_date: str = ""):
         past_date = datetime.strftime(datetime.today() - timedelta(days=3), "%Y/%m/%d")
     future_date = datetime.strftime(datetime.today() + timedelta(days=1), "%Y/%m/%d")
     q_params = {"q": f"from:({FROM_EMAIL}) after:{past_date} before:{future_date}"}
-    creds = Credentials.from_authorized_user_file("../token.json", SCOPES)
+    creds = Credentials.from_authorized_user_file("../../token.json", SCOPES)
     # request
     try:
         # Call the Gmail API

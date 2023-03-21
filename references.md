@@ -8,3 +8,5 @@
 ### possible improvements
 
 - time based filtering of emails (epochs ms in gmail)
+- add the possibility of giving months or years
+- implement logger - a basic template (reusable) - log database

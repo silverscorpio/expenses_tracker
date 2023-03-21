@@ -2,11 +2,7 @@ from datetime import datetime, timedelta
 
 from authenticator import Authenticator
 from googleapiclient.errors import HttpError
-from message_parser import MessageParser
 from settings import FROM_EMAIL, USER_ID
-
-# TODO add the possibility of giving months or years
-# TODO implement logger - a basic template (reusable) - log database
 
 
 class Inbox:
@@ -44,7 +40,6 @@ class Inbox:
                 raw_msgs_data.append(data)
             return raw_msgs_data
         except HttpError as error:
-            # TODO logging
             print(f"An error occurred: {error}")
 
     def _get_query_params(self):

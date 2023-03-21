@@ -5,7 +5,6 @@ from typing import Any, List
 from bs4 import BeautifulSoup
 
 
-# TODO variable declaration inside classes
 class MessageParser:
     def __init__(self, messages: list[str]):
         self.msgs = messages
