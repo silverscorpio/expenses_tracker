@@ -1,6 +1,5 @@
 import base64
 import re
-from typing import Any, List
 
 from bs4 import BeautifulSoup
 
@@ -8,13 +7,16 @@ from bs4 import BeautifulSoup
 class MessageParser:
     def __init__(self, messages: list[str]):
         self.msgs = messages
+        self.parsed_msgs = None
 
-    def parse_msgs(self) -> list[str]:
-        return [MessageParser.get_processed_msg(i) for i in self.msgs]
+    def parse_msgs(self):
+        self.parsed_msgs = [MessageParser.get_processed_msg(i) for i in self.msgs]
 
     def extract_regex_data(self, regex_list: list[str]) -> list[list[list[str]]]:
         extracted_data = []
-        for msg in self.msgs:
+        if self.parsed_msgs is None:
+            self.parse_msgs()
+        for msg in self.parsed_msgs:
             msg_info = []
             for r in regex_list:
                 msg_info.append(

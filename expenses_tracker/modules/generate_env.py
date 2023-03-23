@@ -11,7 +11,7 @@ def get_creds(filename: str) -> dict:
 
 
 def get_env(
-    creds_filename: str = "../credentials.json", env_filename: str = "../.env"
+        creds_filename: str = "../../credentials.json", env_filename: str = "../../.env"
 ) -> None:
     with open(env_filename, "w") as f:
         for k, v in get_creds(filename=creds_filename).items():

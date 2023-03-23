@@ -5,7 +5,7 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from expenses_tracker.old_scripts.parse_msg import parse_all, regex_parse
+from expenses_tracker.playground.parse_msg import parse_all, regex_parse
 
 # load_dotenv()
 #

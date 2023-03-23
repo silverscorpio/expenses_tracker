@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 
-from authenticator import Authenticator
+from .authenticator import Authenticator
+from .settings import FROM_EMAIL, USER_ID
 from googleapiclient.errors import HttpError
-from settings import FROM_EMAIL, USER_ID
 
 
 class Inbox:
@@ -43,7 +43,7 @@ class Inbox:
             print(f"An error occurred: {error}")
 
     def _get_query_params(self):
-        # TODO currently implemented for searching using from a sender and between two specific dates
+        # currently implemented for searching using from a sender and between two specific dates
         filter_string = (
             f"from:({FROM_EMAIL}) after:{self.from_date} before:{self.till_date}"
         )
