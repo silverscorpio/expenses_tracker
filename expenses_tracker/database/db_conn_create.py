@@ -1,4 +1,4 @@
-from db_schema import db, Tracker
+from db_schema import Tracker, db
 
 
 def connect():
@@ -14,5 +14,5 @@ def main():
     create_table()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -7,7 +7,7 @@ def get_regexp_list() -> list[str]:
         "MONEY_SPENT": r"[A-Z]{3}\s\d+\.?\d+[\.?|\s]",
         "TRANSACTION_DATE": r"\s\d+-[A-Z]{3}-\d{2}\s",
         "TRANSACTION_TIME": r"\s\d{2}:\d{2}\s[AP][M]",
-        "MERCHANT": r"[AP][M]\s[a][t][\w\s]{1,150}\s*"
+        "MERCHANT": r"[AP][M]\s[a][t][\w\s]{1,150}\s*",
     }
     return [value for value in regex_data.values()]
 
@@ -21,5 +21,5 @@ def main(duration: int | str, regexp_list: list[str]):
         print(i)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(duration=4, regexp_list=get_regexp_list())

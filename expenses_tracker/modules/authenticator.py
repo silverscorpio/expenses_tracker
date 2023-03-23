@@ -1,17 +1,16 @@
 import os
 
-from .generate_env import get_env
-from .settings import SCOPES, TOKEN_PATH, CREDENTIALS_PATH, ENV_PATH
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+from .generate_env import get_env
+from .settings import CREDENTIALS_PATH, ENV_PATH, SCOPES, TOKEN_PATH
+
 
 class Authenticator:
-    def __init__(
-            self, creds_path: str = None, scopes: list[str] = None
-    ):
+    def __init__(self, creds_path: str = None, scopes: list[str] = None):
 
         if scopes is None:
             self.scopes: list[str] = SCOPES
@@ -24,9 +23,7 @@ class Authenticator:
 
     def generate_creds(self):
         if self._is_token_generated:
-            self._creds = Credentials.from_authorized_user_file(
-                TOKEN_PATH, self.scopes
-            )
+            self._creds = Credentials.from_authorized_user_file(TOKEN_PATH, self.scopes)
         if not self._creds or not self._creds.valid:
             if self._creds and self._creds.expired and self._creds.refresh_token:
                 self._creds.refresh(Request())

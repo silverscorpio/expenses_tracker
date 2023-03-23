@@ -23,4 +23,6 @@ class Tracker(BaseModel):
 
     class Meta:
         table_name = "expenses_tracker"
-        primary_key = CompositeKey("merchant", "money_spent", "current_balance", "transaction_date_ger")
+        primary_key = CompositeKey(
+            "merchant", "money_spent", "current_balance", "transaction_date_ger"
+        )

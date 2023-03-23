@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 
+from googleapiclient.errors import HttpError
+
 from .authenticator import Authenticator
 from .settings import FROM_EMAIL, USER_ID
-from googleapiclient.errors import HttpError
 
 
 class Inbox:
