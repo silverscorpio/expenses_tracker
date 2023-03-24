@@ -1,4 +1,4 @@
-from db_schemas import MerchantTag, Tracker, db
+from db_schemas import Tracker, TransactionTag, db
 
 
 def connect():
@@ -6,12 +6,17 @@ def connect():
 
 
 def create_table():
-    db.create_tables([Tracker, MerchantTag])
+    db.create_tables([Tracker, TransactionTag])
+
+
+def close():
+    db.close()
 
 
 def main():
     connect()
     create_table()
+    close()
 
 
 if __name__ == "__main__":

@@ -17,8 +17,9 @@ def main(duration: int | str, regexp_list: list[str]):
     parser = MessageParser(messages=raw_messages)
     parser.parse_msgs()
     parser.extract_regex_data(regex_list=regexp_list)
-    print(parser.extracted_regex_info)
+    for i in parser.extracted_regex_info:
+        print(" ".join(i[-1].split()[2:]).lower())
 
 
 if __name__ == "__main__":
-    main(duration=2, regexp_list=get_regexp_list())
+    main(duration=40, regexp_list=get_regexp_list())

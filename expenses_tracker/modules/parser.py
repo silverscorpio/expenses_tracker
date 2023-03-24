@@ -89,7 +89,8 @@ class MessageParser:
         return base64.urlsafe_b64decode(content.encode("ASCII")).decode("utf-8")
 
     @staticmethod
-    def _regex_parse(regex: str, search_exp: str) -> list:
+    def _regex_parse(regex: str, search_exp: str) -> list | str:
         match = re.findall(regex, search_exp)
         if match:
             return match
+        return ""  # credited
