@@ -5,8 +5,9 @@
 - https://developers.google.com/gmail/api/reference/rest/v1/users.messages/get
 - https://developers.google.com/identity/protocols/oauth2/web-server#offline
 
-### possible improvements
+### thoughts
 
-- time based filtering of emails (epochs ms in gmail)
-- add the possibility of giving months or years
-- implement logger - a basic template (reusable) - log database
+* features
+    - time based filtering of emails (epochs ms in gmail?)
+    - add the possibility of giving months or years
+    - implement logger - a basic template (reusable) - log database
