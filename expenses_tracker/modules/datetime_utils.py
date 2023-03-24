@@ -1,9 +1,15 @@
-# Timezone conversion
+# datetime utilities
 
 from datetime import datetime
 
 import pytz
 from pytz import timezone
+
+
+def change_date_format(
+    given_date: str, given_format: str = "%d-%b-%y", req_format: str = "%Y/%m/%d"
+) -> str:
+    return datetime.strptime(given_date, given_format).strftime(req_format)
 
 
 # (default: from India to Germany)
@@ -27,4 +33,9 @@ def convert_tz(
 
 
 if __name__ == "__main__":
+    # print(
+    #     change_date_format(
+    #         given_date="24-MAR-23", given_format="%d-%b-%y", req_format="%Y/%m/%d"
+    #     )
+    # )
     print(convert_tz(given_datetime_12="2023/03/21 01:36 AM"))

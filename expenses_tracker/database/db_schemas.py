@@ -26,3 +26,11 @@ class Tracker(BaseModel):
         primary_key = CompositeKey(
             "merchant", "money_spent", "current_balance", "transaction_date_ger"
         )
+
+
+class MerchantTag(BaseModel):
+    merchant = CharField(primary_key=True)
+    tag = CharField()
+
+    class Meta:
+        table_name = "merchant_tag"
