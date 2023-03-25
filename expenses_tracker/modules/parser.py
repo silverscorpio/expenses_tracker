@@ -4,6 +4,7 @@ from enum import Enum, unique
 
 from bs4 import BeautifulSoup
 
+from ..database.db_utils import retrieve_tag
 from .datetime_utils import change_date_format, convert_tz
 
 
@@ -58,15 +59,14 @@ class MessageParser:
                 "old_balance": (
                     float(transaction[0].split()[1]) + float(transaction[1].split()[1])
                 ),
-                "tag": self.tag_transaction(),
+                "tag": retrieve_tag(
+                    merchant=" ".join(transaction[-1].split()[2:]).lower()
+                ),
                 "transaction_date_ind": transaction[2],
                 "transaction_time_ind": transaction[3],
             }
             db_data.append(db_row)
         self.processed_data = db_data
-
-    def tag_transaction(self):
-        pass
 
     # helper functions
     @staticmethod

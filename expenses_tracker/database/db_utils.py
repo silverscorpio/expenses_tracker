@@ -1,4 +1,9 @@
 import peewee
+from db_schemas import TransactionTag
+
+
+def retrieve_tag(merchant: str) -> int:
+    return TransactionTag.get(TransactionTag.merchant_name == merchant).tag
 
 
 def db_store(database: peewee.SqliteDatabase, model, data: list[dict]):
@@ -12,4 +17,4 @@ def db_make_table(database: peewee.SqliteDatabase, model: peewee.ModelBase):
 
 
 if __name__ == "__main__":
-    pass
+    print(retrieve_tag(merchant="no starch press"))
