@@ -10,15 +10,11 @@ from .datetime_utils import change_date_format, convert_tz
 class MessageParser:
     @unique
     class Tag(Enum):
-        FOOD_DRINKS_GROCERIES = 1
-        EDUCATION_AND_LEARNING = 2
-        BILLS = 3
-        TRAVEL = 4
-        UTILITIES = 5
-        SHOPPING = 6
-        SALARY = 7
-        EXTRA_INCOME = 8
-        OTHERS = 9
+        GROCERIES = 1
+        LEARNING = 2
+        TRAVEL = 3
+        SHOPPING = 4
+        OTHERS = 5
 
     def __init__(self, messages: list[str]):
         self.msgs = messages

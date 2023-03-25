@@ -28,7 +28,7 @@ class Tracker(BaseModel):
 
 class TransactionTag(BaseModel):
     merchant_name = CharField(primary_key=True)
-    type = CharField()
+    tag = IntegerField()
 
     class Meta:
         table_name = "transaction_tag"
