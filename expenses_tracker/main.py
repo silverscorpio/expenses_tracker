@@ -1,7 +1,8 @@
 from modules.inbox import Inbox
 from modules.parser import MessageParser
 
-from expenses_tracker.database.db_schemas import db
+from expenses_tracker.database.db_schemas import Expenses, db
+from expenses_tracker.database.db_utils import db_store
 
 
 def get_regexp_list() -> list[str]:
@@ -21,7 +22,8 @@ def main(duration: int | str, regexp_list: list[str]):
         parser.parse_msgs()
         parser.extract_regex_data(regex_list=regexp_list)
         parser.process_data()
-        print(parser.processed_data)
+        # print(parser.processed_data)
+        db_store(database=db, model=Expenses, data=parser.processed_data)
 
 
 if __name__ == "__main__":
