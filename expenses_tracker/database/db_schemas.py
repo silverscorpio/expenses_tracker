@@ -1,8 +1,14 @@
+import peewee
 from peewee import *
 
 from expenses_tracker.modules.settings import DATABASE_PATH
 
-db = SqliteDatabase(DATABASE_PATH)
+
+def get_db(db_path: str) -> peewee.SqliteDatabase:
+    return SqliteDatabase(db_path)
+
+
+db = get_db(db_path=DATABASE_PATH)
 
 
 class BaseModel(Model):
@@ -35,7 +41,4 @@ class TransactionTag(BaseModel):
 
 
 if __name__ == "__main__":
-    print(DATABASE_PATH)
-    # db.connect()
-    # db.create_tables([Expenses, TransactionTag])
-    # db.close()
+    pass

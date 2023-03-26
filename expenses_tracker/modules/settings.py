@@ -1,3 +1,5 @@
+import os
+
 from environs import Env
 
 env = Env()
@@ -9,4 +11,5 @@ SCOPES = env.list("SCOPES")
 TOKEN_PATH = env.str("TOKEN_PATH")
 CREDENTIALS_PATH = env.str("CREDENTIALS_PATH")
 ENV_PATH = env.str("ENV_PATH")
-DATABASE_PATH = env.str("DATABASE_PATH")
+DATABASE_NAME = env.str("DATABASE_NAME")
+DATABASE_PATH = os.path.join(env.str("DATABASE_ROOT"), DATABASE_NAME)
