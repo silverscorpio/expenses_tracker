@@ -22,9 +22,8 @@ def main(duration: int | str, regexp_list: list[str]):
         parser.parse_msgs()
         parser.extract_regex_data(regex_list=regexp_list)
         parser.process_data()
-        # print(parser.processed_data)
         db_store(database=db, model=Expenses, data=parser.processed_data)
 
 
 if __name__ == "__main__":
-    main(duration=2, regexp_list=get_regexp_list())
+    main(duration=86, regexp_list=get_regexp_list())

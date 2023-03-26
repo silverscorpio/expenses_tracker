@@ -69,6 +69,12 @@ class MessageParser:
             db_data.append(db_row)
         self.processed_data = db_data
 
+    def get_merchants(self) -> list:
+        return [
+            " ".join(transaction[-1].split()[2:]).lower()
+            for transaction in self.extracted_regex_info
+        ]
+
     # helper functions
     @staticmethod
     def get_ger_datetime(date_val: str, time_val: str) -> str:
