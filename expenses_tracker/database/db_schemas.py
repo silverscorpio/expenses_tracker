@@ -1,8 +1,8 @@
 from peewee import *
 
-DATABASE = "tracker.db"
+from expenses_tracker.modules.settings import DATABASE_PATH
 
-db = SqliteDatabase(DATABASE)
+db = SqliteDatabase(DATABASE_PATH)
 
 
 class BaseModel(Model):
@@ -10,7 +10,7 @@ class BaseModel(Model):
         database = db
 
 
-class Tracker(BaseModel):
+class Expenses(BaseModel):
     merchant = CharField()
     money_spent = FloatField()
     current_balance = FloatField()
@@ -22,7 +22,7 @@ class Tracker(BaseModel):
     transaction_time_ind = TimeField()
 
     class Meta:
-        table_name = "expenses_tracker"
+        table_name = "expenses"
         primary_key = CompositeKey("transaction_date_ger", "transaction_time_ger")
 
 
@@ -32,3 +32,10 @@ class TransactionTag(BaseModel):
 
     class Meta:
         table_name = "transaction_tag"
+
+
+if __name__ == "__main__":
+    print(DATABASE_PATH)
+    # db.connect()
+    # db.create_tables([Expenses, TransactionTag])
+    # db.close()

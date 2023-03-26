@@ -1,5 +1,6 @@
 import peewee
-from db_schemas import TransactionTag
+
+from expenses_tracker.database.db_schemas import TransactionTag
 
 
 def retrieve_tag(merchant: str) -> int:

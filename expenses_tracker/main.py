@@ -1,3 +1,4 @@
+from database.db_schemas import db
 from modules.inbox import Inbox
 from modules.parser import MessageParser
 
@@ -13,13 +14,15 @@ def get_regexp_list() -> list[str]:
 
 
 def main(duration: int | str, regexp_list: list[str]):
+    db.connect()
     raw_messages = Inbox(time_duration=duration).get_inbox_msgs_data()
     parser = MessageParser(messages=raw_messages)
     parser.parse_msgs()
     parser.extract_regex_data(regex_list=regexp_list)
-    for i in parser.extracted_regex_info:
-        print(" ".join(i[-1].split()[2:]).lower())
+    parser.process_data()
+    print(parser.processed_data)
+    db.close()
 
 
 if __name__ == "__main__":
-    main(duration=40, regexp_list=get_regexp_list())
+    main(duration=2, regexp_list=get_regexp_list())

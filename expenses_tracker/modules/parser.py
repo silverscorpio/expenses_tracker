@@ -4,7 +4,8 @@ from enum import Enum, unique
 
 from bs4 import BeautifulSoup
 
-from ..database.db_utils import retrieve_tag
+from expenses_tracker.database.db_utils import retrieve_tag
+
 from .datetime_utils import change_date_format, convert_tz
 
 
@@ -90,3 +91,7 @@ class MessageParser:
         if match:
             return match
         return ""  # credited
+
+
+if __name__ == "__main__":
+    print(retrieve_tag(merchant="no starch press"))
