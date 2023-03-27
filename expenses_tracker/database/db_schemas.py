@@ -29,7 +29,9 @@ class Expenses(BaseModel):
 
     class Meta:
         table_name = "expenses"
-        primary_key = CompositeKey("transaction_date_ger", "transaction_time_ger")
+        primary_key = CompositeKey(
+            "current_balance", "transaction_date_ger", "transaction_time_ger"
+        )
 
 
 class TransactionTag(BaseModel):

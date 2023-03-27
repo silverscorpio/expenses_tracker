@@ -17,6 +17,7 @@ class MessageParser:
         TRAVEL = 3
         SHOPPING = 4
         OTHERS = 5
+        UPLOADED = 6
 
     def __init__(self, messages: list[str]):
         self.msgs = messages
@@ -52,17 +53,25 @@ class MessageParser:
             ger_date = ger_datetime[0]
             ger_time = " ".join(ger_datetime[1:])
             db_row = {
-                "merchant": " ".join(transaction[-1].split()[2:]).lower(),
+                "merchant": " ".join(transaction[-1].split()[2:]).lower()
+                if transaction[-1]
+                else "None",
                 "money_spent": float(transaction[0].split()[1]),
                 "current_balance": float(transaction[1].split()[1]),
                 "transaction_date_ger": ger_date,
                 "transaction_time_ger": ger_time,
                 "old_balance": (
-                    float(transaction[0].split()[1]) + float(transaction[1].split()[1])
+                    round(
+                        (
+                            float(transaction[0].split()[1])
+                            + float(transaction[1].split()[1])
+                        ),
+                        2,
+                    )
                 ),
-                "tag": retrieve_tag(
-                    merchant=" ".join(transaction[-1].split()[2:]).lower()
-                ),
+                "tag": MessageParser.Tag(
+                    retrieve_tag(merchant=" ".join(transaction[-1].split()[2:]).lower())
+                ).name,
                 "transaction_date_ind": transaction[2],
                 "transaction_time_ind": transaction[3],
             }
@@ -96,8 +105,8 @@ class MessageParser:
         match = re.findall(regex, search_exp)
         if match:
             return match
-        return [""]  # credited
+        return [""]  # uploaded
 
 
 if __name__ == "__main__":
-    print(retrieve_tag(merchant="no starch press"))
+    print(MessageParser.Tag(6).name)

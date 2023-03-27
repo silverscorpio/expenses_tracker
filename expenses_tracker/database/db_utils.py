@@ -10,7 +10,9 @@ def if_merchant_exists(merchant: str) -> bool:
 
 
 def retrieve_tag(merchant: str) -> int:
-    return TransactionTag.get(TransactionTag.merchant_name == merchant).tag
+    if if_merchant_exists(merchant=merchant):
+        return TransactionTag.get(TransactionTag.merchant_name == merchant).tag
+    return 6  # uploaded (guaranteed no merchant)
 
 
 def db_store(database: peewee.SqliteDatabase, model, data: list[dict]):
@@ -21,10 +23,18 @@ def db_store(database: peewee.SqliteDatabase, model, data: list[dict]):
         print("duplicate transaction")
 
 
+def db_store_single(database: peewee.SqliteDatabase, model, **kwargs):
+    try:
+        with database.atomic():
+            model.create(**kwargs)
+    except peewee.IntegrityError:
+        print("duplicate transaction")
+
+
 def db_make_table(database: peewee.SqliteDatabase, model: peewee.ModelBase):
     if not database.table_exists(model):
         database.create_tables([model])
 
 
 if __name__ == "__main__":
-    pass
+    print(retrieve_tag(merchant=""))
