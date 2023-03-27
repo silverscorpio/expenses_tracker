@@ -92,11 +92,11 @@ class MessageParser:
         return base64.urlsafe_b64decode(content.encode("ASCII")).decode("utf-8")
 
     @staticmethod
-    def _regex_parse(regex: str, search_exp: str) -> list | str:
+    def _regex_parse(regex: str, search_exp: str) -> list:
         match = re.findall(regex, search_exp)
         if match:
             return match
-        return ""  # credited
+        return [""]  # credited
 
 
 if __name__ == "__main__":
