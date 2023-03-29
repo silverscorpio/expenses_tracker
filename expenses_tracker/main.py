@@ -28,4 +28,5 @@ def main(duration: int | str, regexp_list: list[str]):
 
 if __name__ == "__main__":
     # 2023 transactions (27.03)
-    main(duration=86, regexp_list=get_regexp_list())
+    # date format - 2023/3/4
+    main(duration="2023/3/29", regexp_list=get_regexp_list())
