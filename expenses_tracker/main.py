@@ -1,8 +1,11 @@
+from datetime import datetime, timedelta
+
 from modules.inbox import Inbox
-from modules.parser import MessageParser
 
 from expenses_tracker.database.db_schemas import Expenses, db
 from expenses_tracker.database.db_utils import db_store
+from expenses_tracker.modules.cmdline import args_parser
+from expenses_tracker.modules.parser import MessageParser
 
 
 def get_regexp_list() -> list[str]:
@@ -16,17 +19,24 @@ def get_regexp_list() -> list[str]:
     return [value for value in regex_data.values()]
 
 
-def main(duration: int | str, regexp_list: list[str]):
+def main(
+    regexp_list: list[str],
+    duration: int
+    | str = (datetime.today().date() - timedelta(days=1)).strftime("%Y/%m/%d"),
+):
     with db:
         raw_messages = Inbox(time_duration=duration).get_inbox_msgs_data()
         parser = MessageParser(messages=raw_messages)
         parser.parse_msgs()
         parser.extract_regex_data(regex_list=regexp_list)
         parser.process_data()
-        db_store(database=db, model=Expenses, data=parser.processed_data)
+        db_store(
+            database=db, model=Expenses, data=parser.processed_data, loop_over=True
+        )
 
 
 if __name__ == "__main__":
     # 2023 transactions (27.03)
     # date format - 2023/3/4
-    main(duration="2023/3/29", regexp_list=get_regexp_list())
+    time_duration = args_parser()
+    main(duration=time_duration, regexp_list=get_regexp_list())

@@ -15,12 +15,23 @@ def retrieve_tag(merchant: str) -> int:
     return 6  # uploaded (guaranteed no merchant)
 
 
-def db_store(database: peewee.SqliteDatabase, model, data: list[dict]):
-    try:
-        with database.atomic():
-            model.insert_many(data).execute()
-    except peewee.IntegrityError:
-        print("duplicate transaction")
+def db_store(
+    database: peewee.SqliteDatabase, model, data: list[dict], loop_over: bool = False
+):
+    if loop_over:
+        for transaction in data:
+            try:
+                with database.atomic():
+                    model.create(**transaction)
+            except peewee.IntegrityError:
+                print(f"duplicate transaction - {transaction}")
+                continue
+    else:
+        try:
+            with database.atomic():
+                model.insert_many(data).execute()
+        except peewee.IntegrityError:
+            print("duplicate transaction")
 
 
 def db_store_single(database: peewee.SqliteDatabase, model, **kwargs):
