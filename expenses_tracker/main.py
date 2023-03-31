@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
 
-from expenses_tracker.database.db_schemas import Expenses, db
-from expenses_tracker.database.db_utils import db_store
-from expenses_tracker.modules.cmdline import args_parser
-from expenses_tracker.modules.inbox import Inbox
-from expenses_tracker.modules.parser import MessageParser
+from database.db_schemas import Expenses, db
+from database.db_utils import db_store
+from modules.cmdline import args_parser
+from modules.inbox import Inbox
+from modules.parser import MessageParser
 
 
 def get_regexp_list() -> list[str]:
@@ -37,6 +37,8 @@ def main(
 if __name__ == "__main__":
     # 2023 transactions (27.03)
     # date format - 2023/3/4
-    time_duration = args_parser()
-    print(time_duration)
-    # main(duration=time_duration, regexp_list=get_regexp_list())
+
+    # cmdline part
+    # time_duration = args_parser()
+
+    main(duration=1, regexp_list=get_regexp_list())
