@@ -1,7 +1,7 @@
 import peewee
 from peewee import *
 
-from expenses_tracker.modules.settings import DATABASE_PATH
+from ..settings import DATABASE_PATH
 
 
 def get_db(db_path: str) -> peewee.SqliteDatabase:

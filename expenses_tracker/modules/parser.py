@@ -4,8 +4,7 @@ from enum import Enum, unique
 
 from bs4 import BeautifulSoup
 
-from expenses_tracker.database.db_utils import retrieve_tag
-
+from .database.db_utils import retrieve_tag
 from .datetime_utils import change_date_format, convert_tz
 
 

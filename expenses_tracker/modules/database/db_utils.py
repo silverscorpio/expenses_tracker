@@ -1,6 +1,6 @@
 import peewee
 
-from expenses_tracker.database.db_schemas import TransactionTag
+from .db_schemas import TransactionTag
 
 
 def if_merchant_exists(merchant: str) -> bool:

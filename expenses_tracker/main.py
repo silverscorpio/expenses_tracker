@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 
-from database.db_schemas import Expenses, db
-from database.db_utils import db_store
-from modules.cmdline import args_parser
+from modules.database.db_schemas import Expenses, db
+from modules.database.db_utils import db_store
 from modules.inbox import Inbox
 from modules.parser import MessageParser
 
