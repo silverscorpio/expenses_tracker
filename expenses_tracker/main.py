@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from modules.cmdline import args_parser
 from modules.database.db_schemas import Expenses, db
 from modules.database.db_utils import db_store
 from modules.inbox import Inbox
@@ -34,10 +35,10 @@ def main(
 
 
 if __name__ == "__main__":
-    # 2023 transactions (27.03)
-    # date format - 2023/3/4
+    # 2023 transactions (27.03), date format - 2023/3/4
 
-    # cmdline part
-    # time_duration = args_parser()
+    # cmdline part, default is 1 day from present
+    time_duration = args_parser()
 
-    main(duration=1, regexp_list=get_regexp_list())
+    # from IDE
+    main(duration=time_duration, regexp_list=get_regexp_list())
