@@ -25,7 +25,7 @@ class MessageParser:
         self.processed_data = None
 
     def parse_msgs(self):
-        self.parsed_msgs = [MessageParser.get_processed_msg(i) for i in self.msgs]
+        self.parsed_msgs = [MessageParser._get_processed_msg(i) for i in self.msgs]
 
     def extract_regex_data(self, regex_list: list[str]):
         extracted_data = []
@@ -37,7 +37,7 @@ class MessageParser:
                 msg_info.extend(
                     [
                         i.strip()
-                        for i in MessageParser._regex_parse(regex=r, search_exp=msg)
+                        for i in MessageParser.regex_parse(regex=r, search_exp=msg)
                     ]
                 )
             extracted_data.append(msg_info)
@@ -90,7 +90,7 @@ class MessageParser:
         return convert_tz(given_datetime_12=ind_datetime)
 
     @staticmethod
-    def get_processed_msg(body: str) -> str:
+    def _get_processed_msg(body: str) -> str:
         decoded_body = MessageParser._decode_content(body)
         extracted_soup = BeautifulSoup(decoded_body, "html.parser")
         return extracted_soup.get_text().strip()
@@ -100,7 +100,7 @@ class MessageParser:
         return base64.urlsafe_b64decode(content.encode("ASCII")).decode("utf-8")
 
     @staticmethod
-    def _regex_parse(regex: str, search_exp: str) -> list:
+    def regex_parse(regex: str, search_exp: str) -> list:
         match = re.findall(regex, search_exp)
         if match:
             return match

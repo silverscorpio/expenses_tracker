@@ -2,9 +2,9 @@
 name = "expenses-tracker"
 version = "0.1.0"
 description = ""
-authors = ["silverscorpio <rajat.newtoneinstein@gmail.com>"]
+authors = ["silverscorpio"]
 readme = "README.md"
-packages = [{include = "expenses_tracker"}]
+packages = [{ include = "expenses_tracker" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
