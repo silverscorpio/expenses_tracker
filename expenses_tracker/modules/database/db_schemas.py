@@ -20,6 +20,7 @@ class Expenses(BaseModel):
     merchant = CharField()
     money_spent = FloatField()
     current_balance = FloatField()
+    money_added = FloatField()
     transaction_date_ger = DateField()
     transaction_time_ger = TimeField()
     old_balance = FloatField()

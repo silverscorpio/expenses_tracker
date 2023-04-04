@@ -55,8 +55,15 @@ class MessageParser:
                 "merchant": " ".join(transaction[-1].split()[2:]).lower()
                 if transaction[-1]
                 else "None",
-                "money_spent": float(transaction[0].split()[1]),
-                "current_balance": float(transaction[1].split()[1]),
+                "money_spent": float(transaction[0].split()[1])
+                if transaction[-1]
+                else 0,
+                "current_balance": float(
+                    transaction[1].split()[1]
+                ),  # uploaded value (greater than old)
+                "money_added": 0
+                if transaction[-1]
+                else float(transaction[0].split()[1]),
                 "transaction_date_ger": ger_date,
                 "transaction_time_ger": ger_time,
                 "old_balance": (
@@ -64,6 +71,8 @@ class MessageParser:
                         (
                             float(transaction[0].split()[1])
                             + float(transaction[1].split()[1])
+                            if transaction[-1]
+                            else 0
                         ),
                         2,
                     )
