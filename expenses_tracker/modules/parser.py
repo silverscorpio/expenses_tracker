@@ -1,3 +1,5 @@
+""" Parser class for handling of the parsing of the fetched inbox data for storing in the database"""
+
 import base64
 import re
 from enum import Enum, unique

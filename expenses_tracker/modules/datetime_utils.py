@@ -1,4 +1,4 @@
-# datetime utilities
+""" datetime utilities functions """
 
 from datetime import datetime
 

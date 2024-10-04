@@ -1,3 +1,5 @@
+""" Inbox Class for fetching the relevant mails data from the gmail account after successful authentication """
+
 from datetime import datetime, timedelta
 
 from googleapiclient.errors import HttpError

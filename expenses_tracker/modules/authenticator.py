@@ -1,3 +1,5 @@
+""" Authenticator class for handling of the authentication process using the credentials """
+
 import os
 
 from google.auth.transport.requests import Request

@@ -1,3 +1,5 @@
+""" Read the data from .env file """
+
 import os
 
 from environs import Env
