@@ -1,3 +1,5 @@
+""" Utility functions for interacting with the database """
+
 import peewee
 
 from .db_schemas import TransactionTag

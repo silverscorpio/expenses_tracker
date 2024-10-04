@@ -1,3 +1,5 @@
+""" Uses PeeWee ORM to define the schema of the database (SQLite) (Expenses and Transaction Tag tables) """
+
 import peewee
 from peewee import *
 
