@@ -1,4 +1,4 @@
-""" datetime utilities functions """
+"""datetime utilities functions"""
 
 from datetime import datetime
 

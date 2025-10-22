@@ -1,4 +1,4 @@
-""" Read the data from .env file """
+"""Read the data from .env file"""
 
 import os
 

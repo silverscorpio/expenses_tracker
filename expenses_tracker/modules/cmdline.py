@@ -1,4 +1,4 @@
-""" Cmdline arguments utilities """
+"""Cmdline arguments utilities"""
 
 import argparse
 from datetime import datetime, timedelta

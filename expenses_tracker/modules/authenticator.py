@@ -1,4 +1,4 @@
-""" Authenticator class for handling of the authentication process using the credentials """
+"""Authenticator class for handling of the authentication process using the credentials"""
 
 import os
 
@@ -13,7 +13,6 @@ from .settings import CREDENTIALS_PATH, ENV_PATH, SCOPES, TOKEN_PATH
 
 class Authenticator:
     def __init__(self, creds_path: str = None, scopes: list[str] = None):
-
         if scopes is None:
             self.scopes: list[str] = SCOPES
         if creds_path is None:

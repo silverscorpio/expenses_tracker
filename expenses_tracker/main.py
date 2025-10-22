@@ -20,8 +20,9 @@ def get_regexp_list() -> list[str]:
 
 def main(
     regexp_list: list[str],
-    duration: int
-    | str = (datetime.today().date() - timedelta(days=1)).strftime("%Y/%m/%d"),
+    duration: int | str = (datetime.today().date() - timedelta(days=1)).strftime(
+        "%Y/%m/%d"
+    ),
 ):
     with db:
         raw_messages = Inbox(time_duration=duration).get_inbox_msgs_data()

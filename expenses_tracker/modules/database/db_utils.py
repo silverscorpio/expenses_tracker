@@ -1,4 +1,4 @@
-""" Utility functions for interacting with the database """
+"""Utility functions for interacting with the database"""
 
 import peewee
 
